@@ -1,0 +1,18 @@
+meta {
+  name: Componentes da categoria
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/categorias/{{categoriaId}}/componentes
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar os componentes da categoria", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados).to.be.an("array");
+  });
+}

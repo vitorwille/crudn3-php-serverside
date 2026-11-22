@@ -1,0 +1,18 @@
+meta {
+  name: Listar categorias
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/categorias
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve listar categorias", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados).to.be.an("array");
+  });
+}

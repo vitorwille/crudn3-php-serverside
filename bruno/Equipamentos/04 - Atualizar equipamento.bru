@@ -1,0 +1,28 @@
+meta {
+  name: Atualizar equipamento
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/api/equipamentos/{{equipamentoId}}
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome_equipamento": "Equipamento Atualizado {{$timestamp}}",
+    "componentes": [
+      {{componenteArmazenamentoId}},
+      {{componenteProcessamentoId}},
+      {{componenteDisplayId}}
+    ]
+  }
+}
+
+tests {
+  test("deve atualizar o equipamento", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

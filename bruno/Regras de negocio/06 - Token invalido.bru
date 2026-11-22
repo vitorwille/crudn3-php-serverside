@@ -1,0 +1,21 @@
+meta {
+  name: Token inválido deve falhar
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/categorias
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer token-invalido
+}
+
+tests {
+  test("deve retornar 401", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+}

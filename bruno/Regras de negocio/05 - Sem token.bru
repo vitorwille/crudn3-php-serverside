@@ -1,0 +1,17 @@
+meta {
+  name: Requisição sem token deve falhar
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/categorias
+  body: none
+  auth: none
+}
+
+tests {
+  test("deve retornar 401", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+}

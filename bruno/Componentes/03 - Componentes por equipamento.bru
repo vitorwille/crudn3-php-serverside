@@ -1,0 +1,18 @@
+meta {
+  name: Componentes por equipamento
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/componentes?equipamento={{equipamentoConsultaId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar os componentes do equipamento informado", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados).to.be.an("array");
+  });
+}

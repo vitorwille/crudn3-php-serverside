@@ -1,0 +1,22 @@
+meta {
+  name: Componentes do equipamento por categoria
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/equipamentos/{{equipamentoId}}/componentes?categoria={{categoriaArmazenamentoId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar apenas os componentes da categoria no equipamento", function() {
+    expect(res.getStatus()).to.equal(200);
+    const dados = res.getBody().dados;
+    expect(dados).to.be.an("array");
+    dados.forEach(function(componente) {
+      expect(componente.id_categoria).to.equal(Number(bru.getEnvVar("categoriaArmazenamentoId")));
+    });
+  });
+}

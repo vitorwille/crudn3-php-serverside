@@ -1,0 +1,24 @@
+meta {
+  name: Atualizar componente
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/api/componentes/{{componenteId}}
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome_componente": "Componente Atualizado {{$timestamp}}",
+    "desc_componente": "Descrição atualizada pela collection Bruno"
+  }
+}
+
+tests {
+  test("deve atualizar o componente", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

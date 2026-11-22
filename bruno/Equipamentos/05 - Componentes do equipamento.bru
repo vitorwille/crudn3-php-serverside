@@ -1,0 +1,18 @@
+meta {
+  name: Componentes do equipamento
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/equipamentos/{{equipamentoId}}/componentes
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar os componentes do equipamento", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados).to.be.an("array");
+  });
+}

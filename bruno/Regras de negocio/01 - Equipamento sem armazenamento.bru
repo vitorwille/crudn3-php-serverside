@@ -1,0 +1,27 @@
+meta {
+  name: Equipamento sem armazenamento deve falhar
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/equipamentos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome_equipamento": "Equipamento Inválido {{$timestamp}}",
+    "componentes": [
+      {{componenteProcessamentoId}},
+      {{componenteDisplayId}}
+    ]
+  }
+}
+
+tests {
+  test("deve retornar 422", function() {
+    expect(res.getStatus()).to.equal(422);
+  });
+}

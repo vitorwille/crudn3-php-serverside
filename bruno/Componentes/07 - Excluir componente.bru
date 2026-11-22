@@ -1,0 +1,17 @@
+meta {
+  name: Excluir componente
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/api/componentes/{{componenteId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve excluir o componente", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

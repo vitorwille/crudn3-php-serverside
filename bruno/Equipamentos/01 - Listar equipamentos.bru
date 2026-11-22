@@ -1,0 +1,18 @@
+meta {
+  name: Listar equipamentos
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/equipamentos
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve listar equipamentos", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados).to.be.an("array");
+  });
+}

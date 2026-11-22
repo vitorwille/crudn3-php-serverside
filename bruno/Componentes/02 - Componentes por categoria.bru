@@ -1,0 +1,22 @@
+meta {
+  name: Componentes por categoria
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/componentes?categoria={{categoriaArmazenamentoId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar apenas componentes da categoria informada", function() {
+    expect(res.getStatus()).to.equal(200);
+    const dados = res.getBody().dados;
+    expect(dados).to.be.an("array");
+    dados.forEach(function(componente) {
+      expect(componente.id_categoria).to.equal(Number(bru.getEnvVar("categoriaArmazenamentoId")));
+    });
+  });
+}

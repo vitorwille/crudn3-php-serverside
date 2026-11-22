@@ -1,0 +1,32 @@
+meta {
+  name: Criar componente
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/componentes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome_componente": "Componente Teste {{$timestamp}}",
+    "desc_componente": "Componente criado pela collection Bruno",
+    "id_categoria": {{categoriaArmazenamentoId}}
+  }
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.dados && body.dados.codigo_componente) {
+    bru.setEnvVar("componenteId", body.dados.codigo_componente);
+  }
+}
+
+tests {
+  test("deve criar o componente", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

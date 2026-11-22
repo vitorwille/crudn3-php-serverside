@@ -1,0 +1,24 @@
+meta {
+  name: Equipamento sem componentes deve falhar
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/equipamentos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome_equipamento": "Equipamento sem componentes {{$timestamp}}",
+    "componentes": []
+  }
+}
+
+tests {
+  test("deve retornar 422", function() {
+    expect(res.getStatus()).to.equal(422);
+  });
+}

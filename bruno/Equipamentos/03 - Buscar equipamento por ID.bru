@@ -1,0 +1,18 @@
+meta {
+  name: Buscar equipamento por ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/equipamentos/{{equipamentoId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar o equipamento", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados.id_equipamento).to.equal(Number(bru.getEnvVar("equipamentoId")));
+  });
+}

@@ -1,0 +1,18 @@
+meta {
+  name: Buscar categoria por ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/categorias/{{categoriaId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar a categoria", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados.id_categoria).to.equal(Number(bru.getEnvVar("categoriaId")));
+  });
+}

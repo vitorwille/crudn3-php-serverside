@@ -1,0 +1,18 @@
+meta {
+  name: Listar componentes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/componentes
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve listar componentes", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().dados).to.be.an("array");
+  });
+}

@@ -1,0 +1,17 @@
+meta {
+  name: Categoria com componentes não pode ser excluída
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/categorias/{{categoriaArmazenamentoId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar 409", function() {
+    expect(res.getStatus()).to.equal(409);
+  });
+}

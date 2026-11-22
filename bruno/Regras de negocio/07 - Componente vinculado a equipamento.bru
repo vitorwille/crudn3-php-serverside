@@ -1,0 +1,17 @@
+meta {
+  name: Componente vinculado a equipamento não pode ser excluído
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/api/componentes/{{componenteArmazenamentoId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve retornar 409", function() {
+    expect(res.getStatus()).to.equal(409);
+  });
+}

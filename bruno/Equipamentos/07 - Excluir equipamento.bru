@@ -1,0 +1,17 @@
+meta {
+  name: Excluir equipamento
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/api/equipamentos/{{equipamentoId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("deve excluir o equipamento", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

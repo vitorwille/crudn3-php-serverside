@@ -1,0 +1,30 @@
+meta {
+  name: Criar categoria
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/categorias
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome_categoria": "Categoria Teste {{$timestamp}}"
+  }
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.dados && body.dados.id_categoria) {
+    bru.setEnvVar("categoriaId", body.dados.id_categoria);
+  }
+}
+
+tests {
+  test("deve criar a categoria", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}
